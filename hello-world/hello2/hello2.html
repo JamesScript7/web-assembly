@@ -151,13 +151,23 @@
           if (text) Module.printErr('[post-exception status] ' + text);
         };
       };
+
       function PassValue(){
+      	//ccall method:
       	Module.ccall(
       		'myFunction', // Name of C function
       		null,         // Return type
       		['number'],   // Argument types
       		[ parseInt(document.getElementById("txtValue").value,10) ]
       	);
+
+      	// cwrap method:
+      	// let cwrapMethod = Module.cwrap(
+      	// 	'myFunction',
+      	// 	null,
+      	// 	['number']
+      	// );
+      	// cwrapMethod(10);
       }
     </script>
     <script async type="text/javascript" src="hello2.js"></script>
