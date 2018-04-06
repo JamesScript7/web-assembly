@@ -10,6 +10,7 @@ int main(void)
   // Seed value generator:
   srand(time(NULL));
   printf("%s\n", "Loaded WebAssembly, the future is here!");
+  return 0;
 }
 
 // EMSCRIPTEN_KEEPALIVE: So this can be made available in JS whenever we call it.
