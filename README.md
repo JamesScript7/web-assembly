@@ -2,12 +2,14 @@
 
 Some exercises with WebAssembly in C lang.
 
-Sources:
+Hello world:
 
-(Hello world)
 http://webassembly.org/getting-started/developers-guide/
-*SKILLS:* HTML, C, and emscripten.
 
-(Dice)
+**SKILLS:** HTML, C, and emscripten.
+
+Dice:
+
 https://rockitech.net/p/webassembly/getting-started-webassembly.html
-*SKILLS:* HTML, SCSS, CSS Grid Layout, JS, C, and emscripten.
+
+**SKILLS:** HTML, SCSS, CSS Grid Layout, JS, C, and emscripten.
