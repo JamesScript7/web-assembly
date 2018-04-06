@@ -13,7 +13,7 @@ int main(void)
 }
 
 // EMSCRIPTEN_KEEPALIVE: So this can be made available in JS whenever we call it.
-int EMSCRIPTEN_KEEPALIVE rolla_dice()
+int EMSCRIPTEN_KEEPALIVE roll_of_a_dice()
 {
   return rand() % 6 + 1;
 }
