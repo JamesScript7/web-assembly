@@ -14,7 +14,10 @@ int main(void)
 }
 
 // EMSCRIPTEN_KEEPALIVE: So this can be made available in JS whenever we call it.
-int EMSCRIPTEN_KEEPALIVE roll_of_a_dice()
+int EMSCRIPTEN_KEEPALIVE dice_roll()
 {
   return rand() % 6 + 1;
 }
+
+// TERMINAL:
+// emcc dice.c -s WASM=1 -o ../dice.js -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]'

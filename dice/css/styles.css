@@ -4,7 +4,66 @@ html, body, main, div {
 .dice {
   width: 177px;
   height: 177px;
+  padding: 12px;
+  color: snow;
   background-color: crimson;
   border-radius: 7px; }
+  .dice .dot {
+    width: 34px;
+    height: 34px;
+    margin: 8px;
+    background-color: snow;
+    border-radius: 50%;
+    display: inline-block; }
+  .dice .one, .dice .two, .dice .three, .dice .four, .dice .five, .dice .six {
+    height: 100%;
+    display: none; }
+  .dice .one {
+    justify-content: center;
+    align-items: center; }
+  .dice .two {
+    justify-content: space-between; }
+    .dice .two .last {
+      align-self: flex-end; }
+  .dice .three {
+    justify-content: space-between; }
+    .dice .three .mid {
+      align-self: center; }
+    .dice .three .last {
+      align-self: flex-end; }
+  .dice .four {
+    justify-content: space-between; }
+    .dice .four .col1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+    .dice .four .col2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+  .dice .five {
+    justify-content: space-between; }
+    .dice .five .col1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+    .dice .five .col2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+    .dice .five .col3 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+  .dice .six {
+    justify-content: space-between; }
+    .dice .six .col1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+    .dice .six .col2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
 
 /*# sourceMappingURL=styles.css.map */
