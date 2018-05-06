@@ -94,4 +94,12 @@ select {
       flex-direction: column;
       justify-content: space-between; }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); }
+  40% {
+    transform: translateY(-15px); }
+  60% {
+    transform: translateY(-7px); } }
+
 /*# sourceMappingURL=styles.css.map */

@@ -4,7 +4,7 @@ window.onload = () => {
   const select = document.getElementById('numberOfDice');
   const diceContainer = document.getElementById('dice-container');
 
-  // FUNCTIONS:
+  // FUNCTIONS init, generateDice, toggleOffExcept:
   function init(x) {
     generateDice(x);
   }
@@ -113,11 +113,17 @@ window.onload = () => {
         const childNodeArray = e.target.childNodes;
         let count = 0;
 
+        // Bounce effect
+        diceFace[i].style.animation = 'bounce 0.4s';
+
         let timer = setInterval(function() {
           const fate = _dice_roll();
           toggleOffExcept(fate, childNodeArray);
           count++;
-          if (count >= 10) clearInterval(timer);
+          if (count >= 10) {
+            clearInterval(timer);
+            diceFace[i].style.animation = 'none';
+          }
         }, 80);
 
         // *** For C function _dice_roll()
