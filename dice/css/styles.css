@@ -31,14 +31,16 @@ select {
   color: snow;
   background-color: crimson;
   border-radius: 8px;
-  margin: 6px; }
+  margin: 7px;
+  box-shadow: 3px 3px 1px #A8A8A8; }
   .dice .dot {
     width: 38px;
     height: 38px;
     margin: 8px;
     background-color: snow;
     border-radius: 50%;
-    display: inline-block; }
+    display: inline-block;
+    box-shadow: inset 4px 3px 1px #D8D8D8; }
   .dice .one, .dice .two, .dice .three, .dice .four, .dice .five, .dice .six {
     height: 100%;
     display: none;
