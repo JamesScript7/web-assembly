@@ -1,26 +1,52 @@
 html, body, main, div {
   box-sizing: border-box; }
 
+html {
+  font-family: "helvetica", sans-serif;
+  height: 100%; }
+
+h1 {
+  margin-bottom: 0; }
+
+select {
+  padding: 8px; }
+
+.dice-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.dice-options {
+  display: inline-block;
+  padding: 12px; }
+
 .dice {
-  width: 177px;
-  height: 177px;
+  width: 200px;
+  height: 200px;
   padding: 12px;
   color: snow;
   background-color: crimson;
-  border-radius: 7px; }
+  border-radius: 8px;
+  margin: 6px; }
   .dice .dot {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     margin: 8px;
     background-color: snow;
     border-radius: 50%;
     display: inline-block; }
   .dice .one, .dice .two, .dice .three, .dice .four, .dice .five, .dice .six {
     height: 100%;
-    display: none; }
+    display: none;
+    pointer-events: none; }
   .dice .one {
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    display: flex; }
   .dice .two {
     justify-content: space-between; }
     .dice .two .last {

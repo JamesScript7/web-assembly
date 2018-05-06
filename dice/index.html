@@ -2,6 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="James Kim">
     <meta name="description" content="One or multiple dice that you can roll for a random number between 1 and 6.">
     <title>
@@ -15,69 +16,83 @@
     <main role="main">
       <div>
         <h1>Roll the Dice!</h1>
-        <div id="dice" class="dice">
-          <!-- ONE -->
-          <div id="one" class="one">
-            <div class="dot"></div>
-          </div>
 
-          <!-- TWO -->
-          <div id="two" class="two">
-            <div class="dot"></div>
-            <div class="dot last"></div>
-          </div>
+        <!-- DICE OPTIONS -->
+        <span class="dice-options">Number of dice</span>
+        <select id="numberOfDice">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+        </select>
 
-          <!-- THREE -->
-          <div id="three" class="three">
-            <div class="dot"></div>
-            <div class="dot mid"></div>
-            <div class="dot last"></div>
-          </div>
-
-          <!-- FOUR -->
-          <div id="four" class="four">
-            <div class="col1">
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-            <div class="col2">
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-          </div>
-
-          <!-- FIVE -->
-          <div id="five" class="five">
-            <div class="col1">
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-            <div class="col2">
-              <div class="dot"></div>
-            </div>
-            <div class="col3">
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-          </div>
-
-          <!-- SIX -->
-          <div id="six" class="six">
-            <div class="col1">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-            <div class="col2">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-          </div>
-
-        </div>
+        <!-- DICE -->
+        <div id="dice-container" class="dice-container"></div>
       </div>
     </main>
+
+    <!-- How the hard code of dice should look like: -->
+    <!-- <div id="dice" class="dice">
+      <div id="one" class="one">
+        <div class="dot"></div>
+      </div>
+      <div id="two" class="two">
+        <div class="dot"></div>
+        <div class="dot last"></div>
+      </div>
+      <div id="three" class="three">
+        <div class="dot"></div>
+        <div class="dot mid"></div>
+        <div class="dot last"></div>
+      </div>
+      <div id="four" class="four">
+        <div class="col1">
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="col2">
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div id="five" class="five">
+        <div class="col1">
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="col2">
+          <div class="dot"></div>
+        </div>
+        <div class="col3">
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div id="six" class="six">
+        <div class="col1">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="col2">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div> -->
     <!-- This is where the JS "glue code" comes in -->
     <script src="dice.js"></script>
     <script src="js/main.js"></script>

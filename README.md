@@ -19,4 +19,4 @@ Dice:
 
 https://rockitech.net/p/webassembly/getting-started-webassembly.html
 
-**SKILLS:** HTML, SCSS, CSS Grid Layout, JS, C, and emscripten.
+**SKILLS:** HTML, SCSS, CSS Grid Layout, Flexbox, JS, C, and emscripten.
