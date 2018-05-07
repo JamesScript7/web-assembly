@@ -1,6 +1,6 @@
 'use strict';
 // window.onload because it is most supported.
-window.onload = () => {
+window.onload = function() {
   const select = document.getElementById('number-of-dice');
   const diceContainer = document.getElementById('dice-container');
 
@@ -47,8 +47,10 @@ window.onload = () => {
 
   function generateDice(num) {
     const colorArr = ['crimson', 'forestgreen', 'mediumblue', 'darkviolet', 'orangered', 'orange'];
-    let add = 1, count = 1;
-    let randColor;
+    let
+      add = 1,
+      count = 1,
+      randColor = 0;
 
     // Create 'x' number of dice from the user input.
     for (let i = 1; i <= num; i++) {
@@ -170,7 +172,7 @@ window.onload = () => {
         // you compiled the C script with:
         // -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall"]'
         // let res = Module.ccall(
-        //   'roll_of_a_dice', // name of C function
+        //   'dice_roll', // name of C function
         //   'number',         // return type
         //   null,             // argument type
         //   null              // arguments
@@ -180,7 +182,7 @@ window.onload = () => {
   } // End of generateDice()
 
   // EVENT LISTENER ON <select>:
-  select.addEventListener('change', (e) => {
+  select.addEventListener('change', function(e) {
     const index = e.target.selectedIndex;
     const numOfDice = select[index].value;
 
@@ -190,7 +192,7 @@ window.onload = () => {
   }, {passive: true});
 
   // EVENT LISTENER ON SHAKE-SHAKE-SHAKE
-  window.addEventListener('shake', function(){
+  window.addEventListener('shake', function() {
     diceContainer.childNodes.forEach(function(el, i) {
       diceContainer.childNodes[i].click();
     });
