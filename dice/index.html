@@ -19,12 +19,25 @@
 
         <!-- DICE OPTIONS -->
         <div class="options-container">
-          <span class="dice-options">Quantity</span>
-          <select id="number-of-dice"></select>
+          <div id="left" class="left">
+            <span class="dice-options">Quantity</span>
+            <select id="number-of-dice"></select>
+          </div>
+
+          <!-- GAME SCORE -->
+          <div id="right" class="right">
+            <span id="combo"></span>
+            <span id="score">Score: <span id="score-value" value="0">0</span></span>
+          </div>
         </div>
 
         <!-- DICE -->
         <div id="dice-container" class="dice-container"></div>
+      </div>
+
+      <!-- GAME LEGEND -->
+      <div id="legend">
+        <p>Color = 1pt, Number = 2pt, Color Combo = x2, Number Combo = x3, Both = Total x 2!</p>
       </div>
     </main>
 

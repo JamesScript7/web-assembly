@@ -3,6 +3,11 @@
 window.onload = function() {
   const select = document.getElementById('number-of-dice');
   const diceContainer = document.getElementById('dice-container');
+  let gameMode = false;
+
+  let state = {
+    points: []
+  };
 
   // Check if shake is supported or not.
   if (!("ondevicemotion" in window)) {
@@ -38,10 +43,14 @@ window.onload = function() {
   function toggleOffExcept(x, arr) {
     for (let i = 0; i < arr.length; i++) {
       const faceNum = parseInt(arr[i].id.split("-")[1]);
-      if (x === faceNum)
-        document.getElementById(`${[arr[i].id]}`).style.display = 'flex';
-      else
-        document.getElementById(`${[arr[i].id]}`).style.display = 'none';
+      const faceNode = document.getElementById(`${[arr[i].id]}`);
+      if (x === faceNum) {
+        faceNode.style.display = 'flex';
+        faceNode.parentElement.setAttribute('value', x);
+      }
+      else {
+        faceNode.style.display = 'none';
+      }
     }
   }
 
@@ -61,6 +70,7 @@ window.onload = function() {
       let mainDiv = document.createElement('div');
       mainDiv.id = `dice-${add}`;
       mainDiv.className = 'dice';
+      mainDiv.setAttribute('value', 1);
       mainDiv.setAttribute('style',`background-color: ${colorArr[randColor]}`);
 
       // Create the 6 dice faces.
@@ -150,9 +160,14 @@ window.onload = function() {
         const childNodeArray = e.target.childNodes;
         let count = 0;
 
+        // GAME MODE:
+        if (gameMode) {
+          gameFunction(diceFace[i].getAttribute('value'));
+        }
+
         // Change color after click
-        // randColor = _random_color();
-        // diceFace[i].setAttribute('style',`background-color: ${colorArr[randColor]}`);
+        randColor = _random_color();
+        diceFace[i].setAttribute('style',`background-color: ${colorArr[randColor]}`);
 
         // Bounce effect
         diceFace[i].style.animation = 'bounce 0.4s';
@@ -160,12 +175,12 @@ window.onload = function() {
         let timer = setInterval(function() {
           const fate = _dice_roll();
           toggleOffExcept(fate, childNodeArray);
-          if (count >= 5) {
+          if (count >= 4) {
             clearInterval(timer);
             diceFace[i].style.animation = 'none';
           }
           count++;
-        }, 80);
+        }, 25);
 
         // *** For C function _dice_roll(); and _random_color();
         // Another way of writing it provided that
@@ -184,7 +199,25 @@ window.onload = function() {
   // EVENT LISTENER ON <select>:
   select.addEventListener('change', function(e) {
     const index = e.target.selectedIndex;
-    const numOfDice = select[index].value;
+    const numOfDice = parseInt(select[index].value);
+
+    // GAME MODE:
+    const rightDiv = document.getElementById('right');
+    const legend = document.getElementById('legend');
+    const title = document.querySelector('h1');
+
+    if (numOfDice === 16) {
+      gameMode = true;
+      rightDiv.style.display = 'flex';
+      legend.style.display = 'block';
+      title.innerText = 'Secret Dice Mini-Game!';
+      console.log("G-G-G-Game Mode Initialized!");
+    } else {
+      gameMode = false;
+      rightDiv.style.display = 'none';
+      legend.style.display = 'none';
+      title.innerText = 'Roll The Dice!';
+    }
 
     diceContainer.innerHTML = '';
     // Function that refreshes the number of dice.
@@ -197,6 +230,11 @@ window.onload = function() {
       diceContainer.childNodes[i].click();
     });
   }, false);
+
+  // TEMPORARY MINI GAME MODE WHEN 16 is selected.
+  function gameFunction(num) {
+    console.log(num, 'selected');
+  }
 
   // Initializer(s).
   init(1);

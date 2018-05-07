@@ -45,6 +45,26 @@ select {
   padding: 8px;
 }
 
+.options-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left, .right {
+  display: inline-block;
+}
+
+.right {
+  display: none;
+  min-width: 100px;
+  font-weight: bold;
+}
+
+#legend {
+  display: none;
+  text-align: center;
+}
+
 .dice-container {
   max-width: 950px;
   margin: 0 auto;
