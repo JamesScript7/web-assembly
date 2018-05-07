@@ -5,8 +5,13 @@ html {
   font-family: "helvetica", sans-serif;
   height: 100%; }
 
+body {
+  margin: 0; }
+
 h1 {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-left: 10px; }
 
 select {
   padding: 8px; }
@@ -101,5 +106,8 @@ select {
     transform: translateY(-15px); }
   60% {
     transform: translateY(-7px); } }
+@media only screen and (max-device-width: 480px) {
+  h1, .options-container {
+    text-align: center; } }
 
 /*# sourceMappingURL=styles.css.map */

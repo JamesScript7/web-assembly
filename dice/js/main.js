@@ -1,12 +1,48 @@
 'use strict';
 // window.onload because it is most supported.
 window.onload = () => {
-  const select = document.getElementById('numberOfDice');
+  const select = document.getElementById('number-of-dice');
   const diceContainer = document.getElementById('dice-container');
 
-  // FUNCTIONS init, generateDice, toggleOffExcept:
+  // Check if shake is supported or not.
+  if (!("ondevicemotion" in window)) {
+    alert("Shake Not Supported");
+    // shakeEvent.stop();
+  } else {
+    // Listen to shake event
+    var shakeEvent = new Shake({threshold: 5});
+    shakeEvent.start();
+  }
+
+  // Limit options to 2 if on mobile.
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    generateOptions(2);
+  } else {
+    generateOptions(20);
+  }
+
+  // FUNCTIONS init, generateOptions, toggleOffExcept, generateDice:
   function init(x) {
     generateDice(x);
+  }
+
+  function generateOptions(num) {
+    for (let i = 1; i <= num; i++) {
+      const optionDiv = document.createElement('option');
+      optionDiv.setAttribute('value', i);
+      optionDiv.innerText = i;
+      select.appendChild(optionDiv);
+    }
+  }
+
+  function toggleOffExcept(x, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      const faceNum = parseInt(arr[i].id.split("-")[1]);
+      if (x === faceNum)
+        document.getElementById(`${[arr[i].id]}`).style.display = 'flex';
+      else
+        document.getElementById(`${[arr[i].id]}`).style.display = 'none';
+    }
   }
 
   function generateDice(num) {
@@ -104,14 +140,17 @@ window.onload = () => {
       count++;
     }
 
-    // Attach Event Listeners for each child dice in dice-container:
     const diceFace = diceContainer.childNodes;
-
+    // Attach Event Listeners for each child dice in dice-container:
     diceFace.forEach(function(el, i) {
       diceFace[i].addEventListener('click', function(e) {
         const diceId = e.target.id;
         const childNodeArray = e.target.childNodes;
         let count = 0;
+
+        // Change color after click
+        // randColor = Math.floor((Math.random() * 10) % 7);
+        // diceFace[i].setAttribute('style',`background-color: ${colorArr[randColor]}`);
 
         // Bounce effect
         diceFace[i].style.animation = 'bounce 0.4s';
@@ -120,7 +159,7 @@ window.onload = () => {
           const fate = _dice_roll();
           toggleOffExcept(fate, childNodeArray);
           count++;
-          if (count >= 10) {
+          if (count >= 5) {
             clearInterval(timer);
             diceFace[i].style.animation = 'none';
           }
@@ -138,17 +177,7 @@ window.onload = () => {
         // );
       });
     });
-  }
-
-  function toggleOffExcept(x, arr) {
-    for (let i = 0; i < arr.length; i++) {
-      const faceNum = parseInt(arr[i].id.split("-")[1]);
-      if (x === faceNum)
-        document.getElementById(`${[arr[i].id]}`).style.display = 'flex';
-      else
-        document.getElementById(`${[arr[i].id]}`).style.display = 'none';
-    }
-  }
+  } // End of generateDice()
 
   // EVENT LISTENER ON <select>:
   select.addEventListener('change', (e) => {
@@ -160,6 +189,13 @@ window.onload = () => {
     init(numOfDice);
   }, {passive: true});
 
-  // Initializers.
+  // EVENT LISTENER ON SHAKE-SHAKE-SHAKE
+  window.addEventListener('shake', function(){
+    diceContainer.childNodes.forEach(function(el, i) {
+      diceContainer.childNodes[i].click();
+    });
+  }, false);
+
+  // Initializer(s).
   init(1);
 }
