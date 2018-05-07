@@ -61,10 +61,10 @@ select {
 }
 
 .dice {
-  @include dice-size(200px, 12px);
+  @include dice-size(190px, 12px);
   background-color: $red-dice;
   border-radius: $radius;
-  margin: 7px;
+  margin: 5px;
   box-shadow: 4px 4px 1px #A8A8A8;
 
   .dot {

@@ -151,7 +151,7 @@ window.onload = function() {
         let count = 0;
 
         // Change color after click
-        // randColor = Math.floor((Math.random() * 10) % 7);
+        // randColor = _random_color();
         // diceFace[i].setAttribute('style',`background-color: ${colorArr[randColor]}`);
 
         // Bounce effect
@@ -160,14 +160,14 @@ window.onload = function() {
         let timer = setInterval(function() {
           const fate = _dice_roll();
           toggleOffExcept(fate, childNodeArray);
-          count++;
           if (count >= 5) {
             clearInterval(timer);
             diceFace[i].style.animation = 'none';
           }
+          count++;
         }, 80);
 
-        // *** For C function _dice_roll()
+        // *** For C function _dice_roll(); and _random_color();
         // Another way of writing it provided that
         // you compiled the C script with:
         // -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall"]'

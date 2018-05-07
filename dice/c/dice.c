@@ -19,5 +19,10 @@ int EMSCRIPTEN_KEEPALIVE dice_roll()
   return rand() % 6 + 1;
 }
 
+int EMSCRIPTEN_KEEPALIVE random_color()
+{
+  return rand() % 7;
+}
+
 // TERMINAL:
 // emcc dice.c -s WASM=1 -o ../dice.js -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall","cwrap"]'

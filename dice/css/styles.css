@@ -30,13 +30,13 @@ select {
   padding: 12px; }
 
 .dice {
-  width: 200px;
-  height: 200px;
+  width: 190px;
+  height: 190px;
   padding: 12px;
   color: snow;
   background-color: crimson;
   border-radius: 8px;
-  margin: 7px;
+  margin: 5px;
   box-shadow: 4px 4px 1px #A8A8A8; }
   .dice .dot {
     width: 38px;
