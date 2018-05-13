@@ -5,11 +5,6 @@ window.onload = function() {
   const diceContainer = document.getElementById('dice-container');
 
 /*== GAME MODE START ==*/
-  const movesLeft = document.getElementById('moves-left-value');
-  const selectedValue = document.getElementById('selected-value');
-  const comboZone = document.getElementById('combo-zone');
-  const colorCombo = document.getElementById('color-combo');
-
   let state = {
     gameMode: false,
     master: [],
@@ -28,7 +23,7 @@ window.onload = function() {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     generateOptions(2);
   } else {
-    generateOptions(20);
+    generateOptions(16);
   }
 
   // Check if shake is supported or not.
@@ -261,6 +256,11 @@ window.onload = function() {
 /*== GAME MODE START ==*/
   // TEMPORARY MINI GAME MODE WHEN 16 is selected.
   function gameFunction(num) {
+    const movesLeft = document.getElementById('moves-left-value');
+    const selectedValue = document.getElementById('selected-value');
+    const comboZone = document.getElementById('combo-zone');
+    const colorCombo = document.getElementById('color-combo');
+    
     const currentVal = parseInt(num.value, 10);
     state.master.push(num);
 
