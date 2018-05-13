@@ -8,15 +8,19 @@ window.onload = function() {
   const movesLeft = document.getElementById('moves-left-value');
   const selectedValue = document.getElementById('selected-value');
   const comboZone = document.getElementById('combo-zone');
+  const colorCombo = document.getElementById('color-combo');
 
   let state = {
     gameMode: false,
     master: [],
     current: [],
+    currentColor: [],
     score: 0,
     movesLeft: 20,
-    numberCombo: 4,
-    colorCombo: 2
+    numberCombo: 3,
+    colorCombo: 1,
+    multiplier: 1,
+    colorMultiplier: 1
   };
 /*== GAME MODE END ==*/
 
@@ -33,7 +37,7 @@ window.onload = function() {
     // shakeEvent.stop();
   } else {
     // Listen to shake event.
-    var shakeEvent = new Shake({threshold: 5});
+    var shakeEvent = new Shake({threshold: 4});
     shakeEvent.start();
   }
 
@@ -55,11 +59,11 @@ window.onload = function() {
     for (let i = 0; i < arr.length; i++) {
       const faceNum = parseInt(arr[i].id.split("-")[1], 10);
       const faceNode = document.getElementById(`${[arr[i].id]}`);
+
       if (x === faceNum) {
         faceNode.style.display = 'flex';
         faceNode.parentElement.setAttribute('value', x);
-      }
-      else {
+      } else {
         faceNode.style.display = 'none';
       }
     }
@@ -85,13 +89,13 @@ window.onload = function() {
       mainDiv.setAttribute('value', 1);
 
       // Create the 6 dice faces.
-      for (let i = 1; i <= 6; i++) {
+      for (let j = 1; j <= 6; j++) {
         // Six dice faces.
         let subDiv = document.createElement('div');
-        subDiv.id = `face${count}-${i}`;
+        subDiv.id = `face${count}-${j}`;
 
         // Add dice face group HTML to specific face number.
-        switch(i) {
+        switch(j) {
           case 1:
             subDiv.className = 'one';
             subDiv.innerHTML = (`
@@ -261,18 +265,16 @@ window.onload = function() {
     state.master.push(num);
 
     if (state.movesLeft <= 0) {
-
       // Game Over!
       diceContainer.childNodes.forEach(function(el) {
         el.removeEventListener('click', function() {
         }, false);
       });
-
       console.log("Game Over!\n Your Score is: ", state.score);
-
     } else if (state.current.length === 0) {
 
       state.current.push(num);
+      state.currentColor.push(num.color);
       selectedValue.innerText = currentVal + ' ';
 
     } else if (currentVal === parseInt(state.current[state.current.length - 1].value, 10)) {
@@ -280,12 +282,34 @@ window.onload = function() {
       console.log('Match on ' + num.value);
       selectedValue.innerText += currentVal + ' ';
 
+      // Color checker:
+      if (state.currentColor[state.currentColor.length - 1] === num.color) {
+        state.currentColor.push(num.color);
+        console.log(state.currentColor);
+
+        if (state.currentColor.length > state.colorCombo) {
+          state.colorMultiplier = 4;
+          colorCombo.innerText = 'x4';
+        } else {
+          state.colorMultiplier = 1;
+          colorCombo.innerText = 'x1';
+        }
+
+      } else {
+        state.colorMultiplier = 1;
+        colorCombo.innerText = 'x1';
+        state.currentColor = [];
+        state.currentColor.push(num.color);
+      }
+
+      // Number checker:
       if (state.current.length >= 1) {
         if (state.current.length >= state.numberCombo) {
-          state.score = state.score + 2;
-          console.log(state.score);
+          state.multiplier = 2;
+          state.score = state.score + ( 1 * (state.multiplier * state.colorMultiplier));
           comboZone.innerText = 'x2';
         } else {
+          state.multiplier = 1;
           state.score++;
           comboZone.innerText = 'x1';
         }

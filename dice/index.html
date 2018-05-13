@@ -15,7 +15,10 @@
   <body>
     <main role="main">
       <div>
-        <h1>Roll The Dice!</h1>
+        <div class="title">
+          <h1>Roll The Dice!</h1>
+          <span id="high-score">High Score: 215</span>
+        </div>
 
         <!-- DICE OPTIONS -->
         <div class="options-container">
@@ -28,10 +31,11 @@
 
           <!-- GAME SCORE -->
           <div id="right" class="right">
-            <span id="selected">Selected: <span id="selected-value"></span> Combo: <span id="combo-zone">x1</span></span>
-            <span id="movesLeft">Moves Left: <span id="moves-left-value" value="20">20</span></span>
-            <span id="combo"></span>
-            <span id="score">Score: <span id="score-value" value="0">0</span></span>
+            <span>Selected: <span id="selected-value"></span></span>
+            <span>Number Combo: <span id="combo-zone">x1</span></span>
+            <span>Color Combo: <span id="color-combo">x1</span></span>
+            <span>Moves Left: <span id="moves-left-value" value="20">20</span></span>
+            <span>Score: <span id="score-value" value="0">0</span></span>
           </div>
         </div>
 
@@ -41,7 +45,7 @@
 
       <!-- GAME LEGEND -->
       <div id="legend">
-        <p>Match 2 or more numbers for points! 5 Number combo = x2, 3 color combo = x3</p>
+        <p>Match 2 or more numbers for points! 4 Number combo = x2, 2 color combo = x4</p>
       </div>
     </main>
 
