@@ -260,7 +260,7 @@ window.onload = function() {
     const selectedValue = document.getElementById('selected-value');
     const comboZone = document.getElementById('combo-zone');
     const colorCombo = document.getElementById('color-combo');
-    
+
     const currentVal = parseInt(num.value, 10);
     state.master.push(num);
 
