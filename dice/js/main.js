@@ -5,11 +5,18 @@ window.onload = function() {
   const diceContainer = document.getElementById('dice-container');
 
 /*== GAME MODE START ==*/
-  let gameMode = false;
+  const movesLeft = document.getElementById('moves-left-value');
+  const selectedValue = document.getElementById('selected-value');
+  const comboZone = document.getElementById('combo-zone');
+
   let state = {
+    gameMode: false,
     master: [],
     current: [],
-    score: 0
+    score: 0,
+    movesLeft: 20,
+    numberCombo: 4,
+    colorCombo: 2
   };
 /*== GAME MODE END ==*/
 
@@ -74,8 +81,8 @@ window.onload = function() {
       let mainDiv = document.createElement('div');
       mainDiv.id = `dice-${add}`;
       mainDiv.className = 'dice';
-      mainDiv.setAttribute('value', 1);
       mainDiv.setAttribute('style',`background-color: ${colorArr[randColor]}`);
+      mainDiv.setAttribute('value', 1);
 
       // Create the 6 dice faces.
       for (let i = 1; i <= 6; i++) {
@@ -165,7 +172,7 @@ window.onload = function() {
         let count = 0;
 
 /*== GAME MODE START ==*/
-        if (gameMode) {
+        if (state.gameMode) {
           let value = diceFace[i].getAttribute('value');
           let color = diceFace[i].style.backgroundColor || 'crimson';
 
@@ -214,27 +221,30 @@ window.onload = function() {
     const index = e.target.selectedIndex;
     const numOfDice = parseInt(select[index].value, 10);
 
+    diceContainer.innerHTML = '';
+    // Function that refreshes the number of dice.
+    init(numOfDice);
+
 /*== GAME MODE START ==*/
     const rightDiv = document.getElementById('right');
     const legend = document.getElementById('legend');
     const title = document.querySelector('h1');
 
     if (numOfDice === 16) {
-      gameMode = true;
-      title.innerText = 'Secret Dice Mini-Game!';
+      title.innerText = 'Dice Mini-Game!';
       legend.style.display = 'block';
       rightDiv.style.display = 'flex';
+
+      // Randomize each dice:
+      diceContainer.childNodes.forEach(function(el) { el.click(); });
+      state.gameMode = true;
     } else {
-      gameMode = false;
       title.innerText = 'Roll The Dice!';
       legend.style.display = 'none';
       rightDiv.style.display = 'none';
+      state.gameMode = false;
     }
 /*== GAME MODE END ==*/
-
-    diceContainer.innerHTML = '';
-    // Function that refreshes the number of dice.
-    init(numOfDice);
   }, {passive: true});
 
   // EVENT LISTENER ON SHAKE-SHAKE-SHAKE
@@ -247,31 +257,58 @@ window.onload = function() {
 /*== GAME MODE START ==*/
   // TEMPORARY MINI GAME MODE WHEN 16 is selected.
   function gameFunction(num) {
-
     const currentVal = parseInt(num.value, 10);
     state.master.push(num);
 
-    if (state.current.length === 0) {
+    if (state.movesLeft <= 0) {
+
+      // Game Over!
+      diceContainer.childNodes.forEach(function(el) {
+        el.removeEventListener('click', function() {
+        }, false);
+      });
+
+      console.log("Game Over!\n Your Score is: ", state.score);
+
+    } else if (state.current.length === 0) {
+
       state.current.push(num);
+      selectedValue.innerText = currentVal + ' ';
+
     } else if (currentVal === parseInt(state.current[state.current.length - 1].value, 10)) {
-      console.log('match! on ' + num.value);
+
+      console.log('Match on ' + num.value);
+      selectedValue.innerText += currentVal + ' ';
 
       if (state.current.length >= 1) {
-        state.score++;
+        if (state.current.length >= state.numberCombo) {
+          state.score = state.score + 2;
+          console.log(state.score);
+          comboZone.innerText = 'x2';
+        } else {
+          state.score++;
+          comboZone.innerText = 'x1';
+        }
         document.getElementById('score-value').innerText = state.score;
       }
 
       state.current.push(num);
 
     } else if (currentVal !== parseInt(state.current[state.current.length - 1].value, 10)) {
-      console.log('match lost.');
+
+      console.log('Match broken :(\nStarting again at ', num.value);
+      selectedValue.innerText = '';
+      selectedValue.innerText = currentVal + ' ';
 
       state.current = [];
       state.current.push(num);
+      state.movesLeft--;
+      movesLeft.innerText = state.movesLeft;
     }
 
-    console.log("state.current", state.current);
-    console.log("state.master", state.master);
+    // Master and Current State:
+    // console.log("state.current", state.current);
+    // console.log("state.master", state.master);
   }
 /*== GAME MODE END ==*/
 

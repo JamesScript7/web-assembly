@@ -16,6 +16,9 @@ h1 {
 select {
   padding: 8px; }
 
+span {
+  padding: 0 4px; }
+
 .options-container {
   display: flex;
   justify-content: space-between; }
