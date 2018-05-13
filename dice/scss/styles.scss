@@ -45,6 +45,7 @@ select {
   padding: 8px;
 }
 
+// GAME MODE START
 .options-container {
   display: flex;
   justify-content: space-between;
@@ -64,6 +65,7 @@ select {
   display: none;
   text-align: center;
 }
+// GAME MODE END
 
 .dice-container {
   max-width: 950px;

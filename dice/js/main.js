@@ -3,27 +3,31 @@
 window.onload = function() {
   const select = document.getElementById('number-of-dice');
   const diceContainer = document.getElementById('dice-container');
-  let gameMode = false;
 
+/*== GAME MODE START ==*/
+  let gameMode = false;
   let state = {
-    points: []
+    master: [],
+    current: [],
+    score: 0
   };
+/*== GAME MODE END ==*/
+
+  // Limit options to 2 if on mobile.
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    generateOptions(2);
+  } else {
+    generateOptions(20);
+  }
 
   // Check if shake is supported or not.
   if (!("ondevicemotion" in window)) {
     alert("Shake Not Supported");
     // shakeEvent.stop();
   } else {
-    // Listen to shake event
+    // Listen to shake event.
     var shakeEvent = new Shake({threshold: 5});
     shakeEvent.start();
-  }
-
-  // Limit options to 2 if on mobile.
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    generateOptions(2);
-  } else {
-    generateOptions(20);
   }
 
   // FUNCTIONS init, generateOptions, toggleOffExcept, generateDice:
@@ -42,7 +46,7 @@ window.onload = function() {
 
   function toggleOffExcept(x, arr) {
     for (let i = 0; i < arr.length; i++) {
-      const faceNum = parseInt(arr[i].id.split("-")[1]);
+      const faceNum = parseInt(arr[i].id.split("-")[1], 10);
       const faceNode = document.getElementById(`${[arr[i].id]}`);
       if (x === faceNum) {
         faceNode.style.display = 'flex';
@@ -160,10 +164,19 @@ window.onload = function() {
         const childNodeArray = e.target.childNodes;
         let count = 0;
 
-        // GAME MODE:
+/*== GAME MODE START ==*/
         if (gameMode) {
-          gameFunction(diceFace[i].getAttribute('value'));
+          let value = diceFace[i].getAttribute('value');
+          let color = diceFace[i].style.backgroundColor || 'crimson';
+
+          let currentState = {
+            value: value,
+            color: color
+          }
+
+          gameFunction(currentState);
         }
+/*== GAME MODE END ==*/
 
         // Change color after click
         randColor = _random_color();
@@ -175,7 +188,7 @@ window.onload = function() {
         let timer = setInterval(function() {
           const fate = _dice_roll();
           toggleOffExcept(fate, childNodeArray);
-          if (count >= 4) {
+          if (count >= 5) {
             clearInterval(timer);
             diceFace[i].style.animation = 'none';
           }
@@ -199,25 +212,25 @@ window.onload = function() {
   // EVENT LISTENER ON <select>:
   select.addEventListener('change', function(e) {
     const index = e.target.selectedIndex;
-    const numOfDice = parseInt(select[index].value);
+    const numOfDice = parseInt(select[index].value, 10);
 
-    // GAME MODE:
+/*== GAME MODE START ==*/
     const rightDiv = document.getElementById('right');
     const legend = document.getElementById('legend');
     const title = document.querySelector('h1');
 
     if (numOfDice === 16) {
       gameMode = true;
-      rightDiv.style.display = 'flex';
-      legend.style.display = 'block';
       title.innerText = 'Secret Dice Mini-Game!';
-      console.log("G-G-G-Game Mode Initialized!");
+      legend.style.display = 'block';
+      rightDiv.style.display = 'flex';
     } else {
       gameMode = false;
-      rightDiv.style.display = 'none';
-      legend.style.display = 'none';
       title.innerText = 'Roll The Dice!';
+      legend.style.display = 'none';
+      rightDiv.style.display = 'none';
     }
+/*== GAME MODE END ==*/
 
     diceContainer.innerHTML = '';
     // Function that refreshes the number of dice.
@@ -231,10 +244,36 @@ window.onload = function() {
     });
   }, false);
 
+/*== GAME MODE START ==*/
   // TEMPORARY MINI GAME MODE WHEN 16 is selected.
   function gameFunction(num) {
-    console.log(num, 'selected');
+
+    const currentVal = parseInt(num.value, 10);
+    state.master.push(num);
+
+    if (state.current.length === 0) {
+      state.current.push(num);
+    } else if (currentVal === parseInt(state.current[state.current.length - 1].value, 10)) {
+      console.log('match! on ' + num.value);
+
+      if (state.current.length >= 1) {
+        state.score++;
+        document.getElementById('score-value').innerText = state.score;
+      }
+
+      state.current.push(num);
+
+    } else if (currentVal !== parseInt(state.current[state.current.length - 1].value, 10)) {
+      console.log('match lost.');
+
+      state.current = [];
+      state.current.push(num);
+    }
+
+    console.log("state.current", state.current);
+    console.log("state.master", state.master);
   }
+/*== GAME MODE END ==*/
 
   // Initializer(s).
   init(1);
