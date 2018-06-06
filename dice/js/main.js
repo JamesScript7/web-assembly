@@ -28,7 +28,7 @@ window.onload = function() {
 
   // Check if shake is supported or not.
   if (!("ondevicemotion" in window)) {
-    alert("Shake Not Supported");
+    console.log("Shake Not Supported");
     // shakeEvent.stop();
   } else {
     // Listen to shake event.
@@ -228,11 +228,16 @@ window.onload = function() {
     const rightDiv = document.getElementById('right');
     const legend = document.getElementById('legend');
     const title = document.querySelector('h1');
+    const highScore = document.getElementById('high-score');
 
     if (numOfDice === 16) {
       title.innerText = 'Dice Mini-Game!';
       legend.style.display = 'block';
       rightDiv.style.display = 'flex';
+      highScore.innerText = 'High Score: 404';
+
+      // Disable shake on mobile:
+      shakeEvent.stop();
 
       // Randomize each dice:
       diceContainer.childNodes.forEach(function(el) { el.click(); });
@@ -242,6 +247,7 @@ window.onload = function() {
       legend.style.display = 'none';
       rightDiv.style.display = 'none';
       state.gameMode = false;
+      highScore.innerText = '';
     }
 /*== GAME MODE END ==*/
   }, {passive: true});
@@ -335,7 +341,6 @@ window.onload = function() {
     // console.log("state.master", state.master);
   }
 /*== GAME MODE END ==*/
-
   // Initializer(s).
   init(1);
 }
