@@ -24,8 +24,8 @@ https://rockitech.net/p/webassembly/getting-started-webassembly.html
 
 _Mobile Version Screenshot (with shake feature):_
 
-![Dice mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/web-assembly/tree/master/dice/images/mobile.png)
+![Dice mobile  screenshot](https://raw.githubusercontent.com/JamesScript7/web-assembly/master/dice/images/mobile.png)
 
 _Secret Game-mode Screenshot (with score and multiplier feature):_
 
-![Dice game  screenshot](https://raw.githubusercontent.com/JamesScript7/web-assembly/tree/master/dice/images/game.png)
+![Dice game  screenshot](https://raw.githubusercontent.com/JamesScript7/web-assembly/master/dice/images/game.png)
