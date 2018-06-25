@@ -28,4 +28,7 @@ _Mobile Version Screenshot (with shake feature):_
 
 _Secret Game-mode Screenshot (with score and multiplier feature):_
 
+How the game works:
+Match 2 or more numbers to accrue points! After matching two, if you match the number more than 4 times, your points are multiplied by 2. On top of that, if you match the colors 2 times simultaneously, then your score will be multiplied 4 times the current incremental value.
+
 ![Dice game  screenshot](https://raw.githubusercontent.com/JamesScript7/web-assembly/master/dice/images/game.png)
